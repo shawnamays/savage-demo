@@ -1,7 +1,8 @@
 const trash = document.getElementsByClassName("fa-trash-o");
 
-Array.from(trash).forEach(function(element) {
-  element.addEventListener('click', function() {
+
+Array.from(trash).forEach(function (element) {
+  element.addEventListener('click', function () {
     const task = this.parentNode.parentNode.childNodes[1].innerText
     const day = this.parentNode.parentNode.childNodes[3].innerText
 
@@ -20,6 +21,28 @@ Array.from(trash).forEach(function(element) {
   });
 });
 
+
+Array.from(messages).forEach(function (element) {
+  element.addEventListener('click', function () {
+    
+
+    fetch('messages', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        day
+       
+      })
+    })
+      .then(response => {
+        if (response.ok) return response.json()
+      })
+      .then(data => {
+        console.log(data)
+        window.location.reload(true)
+      })
+  });
+});
 
 
 //I'm going to get the sun sign by checking the value

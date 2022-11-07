@@ -12,7 +12,7 @@
 
 
 <body>
-  <% let daysOfWeek = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'] %>
+
 
   <h2>Don't Go Into Your Days Like An Accident!</h2>
   <p></p>
@@ -26,15 +26,7 @@
   
   <form action="/messages" method="POST">
 
-    <% for(var i=0; i<daysOfWeek.length; i++) {%>
-      <h3>daysOfWeek[i]</h3>
-        <% if (messages[i].daysOfWeek === daysOfWeek[i]){
-         <li class="" 
 
-        }
-     
-
-    <% } %>
     <input type="text" placeholder="enter a task" name="task">
 
     <fieldset>
@@ -63,8 +55,8 @@
     <% for(var i=0; i<messages.length; i++) {%>
 
       <li class="message">
-        <span><%= messages[i].task %></span>
-        <span><%= messages[i].day %></span>
+        <span class="task"><%= messages[i].task %></span>
+        <span class="day"><%= messages[i].day %></span>
         <span><i class="fa fa-trash-o" aria-hidden="true"></i></span>
       </li>
 
