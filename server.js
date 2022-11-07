@@ -1,3 +1,6 @@
+
+// my goal is for user to input their date and they are given their signs based on the data from
+//the API.  they can then input it and ????
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser');
@@ -31,7 +34,7 @@ app.use(express.static('public'))
 
 
 app.get('/', (req, res) => {
-  db.collection('messages').find().toArray((err, result) => {
+  db.collection('birthChart').find().toArray((err, result) => {
     if (err) return console.log(err)
     res.render('index.ejs', { messages: result })
   })
