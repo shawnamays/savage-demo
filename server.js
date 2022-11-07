@@ -34,28 +34,38 @@ app.use(express.static('public'))
 
 
 app.get('/', (req, res) => {
-  db.collection('birthChart').find().toArray((err, result) => {
+  db.collection('messages').find().toArray((err, result) => {
     if (err) return console.log(err)
     res.render('index.ejs', { messages: result })
   })
 })
 
-//this is to insert a new task from the user
-app.post('/messages', (req, res) => {
-  let day = req.body.day
-  
-  //pre conversion checks to see what the typeof Day is
-  if (typeof day === 'string' /* This means only ONE day of the week was sent */) {
-    day = [day] /* We change it to an array that it is easier for Mongo to work with */
-  }
 
-  db.collection('messages').insertOne({ task: req.body.task, day: day }, 
-    (err, result) => {
-      if (err) return console.log(err)
-      console.log('saved to database')
-      res.redirect('/')
-    })
-})
+app.post('/messages', (req, res) => {
+        
+  db.collection('messages').save({favorited: false, task: req.body.task, day: req.body.day}, (err, result) => {
+    if (err) return console.log(err)
+    console.log('saved to database')
+    res.redirect('/')
+  })
+}) 
+
+//this is to insert a new task from the user
+// app.post('/messages', (req, res) => {
+//   let day = req.body.day
+  
+//   //pre conversion checks to see what the typeof Day is
+//   if (typeof day === 'string' /* This means only ONE day of the week was sent */) {
+//     day = [day] /* We change it to an array that it is easier for Mongo to work with */
+//   }
+
+//   db.collection('messages').insertOne({ task: req.body.task, day: day }, 
+//     (err, result) => {
+//       if (err) return console.log(err)
+//       console.log('saved to database')
+//       res.redirect('/')
+//     })
+// })
 
 
 //this is to update the tasks
